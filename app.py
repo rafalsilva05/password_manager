@@ -26,6 +26,9 @@ class User:
     
 def add_user(username, password):
     # new_user = User(username, password)
+
+    password = crip
+
     df = pd.DataFrame({'name': [username], 'password': [password]})
     print(df)
     df.to_csv("tabela.csv", index=False)

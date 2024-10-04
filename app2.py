@@ -9,6 +9,9 @@ import cript
 import pandas as pd
 import os
 
+print("\n\nfor log reasons\n\n===============================NEW RUN===============================")
+
+
 # Application tittle
 st.set_page_config(page_title="password manager")
 
@@ -30,9 +33,16 @@ def access_user_passwords():
     st.title("Get username passwords")
 
     username = st.text_input("Username")
+    master_pwd = st.text_input("Please, write your master password:", type="password")
     
     if st.button("Find passwords"):
-        cript.find_user_passwords()
+        pwd_table = cript.find_user_passwords(username, master_pwd)
+        print(pwd_table)
+        if not pwd_table.empty:
+            st.table(pwd_table)
+        else:
+            st.error("erro krl")
+            st.table(pwd_table)
 
     if st.button("Go to \'add password\'"):
         st.session_state.page = 'add_new_password'
@@ -44,7 +54,7 @@ def add_new_password():
 
     username = st.text_input("Username: ")
     new_password = st.text_input("New password:", type="password")
-    master_pwd = st.text_input("please, write your master password:", type="password")
+    master_pwd = st.text_input("Please, write your master password:", type="password")
 
     # try's to add new password to csv
     # If the m_pwd is valid, add's new password to csv file.

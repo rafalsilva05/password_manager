@@ -6,40 +6,25 @@
 
 import streamlit as st
 import pandas as pd
+import application.authentication as aut
 
 # Application tittle
-st.title("Password_manager")
+st.set_page_config(page_title="password manager")
+st.markdown("<h1 style='text-align: center;'>Password manager</h1>", unsafe_allow_html=True)
 
-# Deffining object User
-class User:
-    def __init__(self, name, pswd) -> None:
-        self.name = name
-        self.pswd = pswd
+# Definition of each pages layout and functionality
 
-    def __str__(self) -> str:
-        return f"{self.name}"
-    
-    def __dict__(self):
-        return {'name': self.name, 'password': list(self.pswd)}
-    
+#def authentication():
+#    pass
 
-    
-def add_user(username, password):
-    # new_user = User(username, password)
+        
+        
+# Management of the application navegation
 
-    df = pd.DataFrame({'name': [username], 'password': [password]})
-    print(df)
-    df.to_csv("tabela.csv", index=False)
-    
-    
+if 'page' not in st.session_state:
+    st.session_state.page = 'authentication'
 
-# User inputs
-username = st.text_input("Enter your Username:")
-password = st.text_input("Enter your password:", type="password")
 
-if st.button("Create User:"):
-    if username and password:
-        add_user(username, password)
-        st.success(f"User {username} created")
-    else:
-        st.error("Please try again")
+match st.session_state.page:
+    case 'authentication':
+        aut.authentication()

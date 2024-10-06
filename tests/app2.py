@@ -5,9 +5,8 @@
 # First I will ask the user his name and a password
 
 import streamlit as st
-import cript
+import tests.cript as cript
 import pandas as pd
-import os
 
 print("\n\nfor log reasons\n\n===============================NEW RUN===============================")
 

@@ -9,9 +9,10 @@ def pwd_manager(token=Token):
     df_pwd = pwd_table.get_user_passwords(token.username)
     for i in df_pwd.index:
         df_pwd.loc[i][1] = token.dec_token(df_pwd.loc[i][1])
+    print(df_pwd)
     st.table(df_pwd)
 
-    password_input_text = st.text_input("Password", type="password", placeholder="Enter password")
+    password_input_text = st.text_input("Password", placeholder="Enter password")
 
     if st.button("Add password"):
         if not password_input_text:
@@ -21,9 +22,9 @@ def pwd_manager(token=Token):
             st.rerun()
         
     
-    if st.button("Remove button"):
+    if st.button("Remove password"):
         if not password_input_text:
             st.error("Please write the password you wanna add")
         else:
-            pwd_table.remove_password(token.username, token.enc_token(password_input_text))
+            pwd_table.remove_password(df_pwd.loc[(df_pwd.password == password_input_text)].index)
             st.rerun()

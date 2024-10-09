@@ -29,8 +29,6 @@ def authentication():
             try:
                 key_token = Token(username_input_text, password_input_text)
                 token = users_table.get_user(username_input_text)[1]
-                st.text(token)
-                st.text(key_token.dec_token(token))
                 return key_token
             except users_table.UserNotFound:
                 st.error("User not found!")

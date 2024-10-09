@@ -30,11 +30,8 @@ match st.session_state.page:
             st.session_state.page = 'password_manager'
             st.rerun()
     case 'password_manager':
-        print("passw man")
         if st.session_state.token:
-            print("aaaa")
             pwd.pwd_manager(st.session_state.token)
         else:
-            print("oxi")
             st.session_state.page = 'authentication'
 
